@@ -1,0 +1,9 @@
+line-length = 110
+target-version = "py312"
+
+[lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = [
+    "B008",   # FastAPI uses function calls (Query/Depends) in arg defaults
+    "UP042",  # `str, Enum` is intentional for clean JSON/OpenAPI serialization
+]
