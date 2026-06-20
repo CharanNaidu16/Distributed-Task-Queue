@@ -3,10 +3,6 @@
 > A production-style job queue: submit work over a REST API, process it on horizontally-scalable
 > workers, and track every job's status live — built with **FastAPI · Redis · RQ · React · Docker**.
 
-[![CI](https://github.com/CharanNaidu16/Distributed-Task-Queue/actions/workflows/ci.yml/badge.svg)](https://github.com/CharanNaidu16/Distributed-Task-Queue/actions/workflows/ci.yml)
-![Python](https://img.shields.io/badge/python-3.12-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
-
 ---
 
 ## Demo
