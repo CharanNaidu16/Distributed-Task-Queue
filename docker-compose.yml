@@ -23,7 +23,10 @@ services:
     # api and worker share THIS image; only the command differs.
     command: uvicorn app.main:app --host 0.0.0.0 --port 8000
     restart: unless-stopped
-    env_file: .env
+    # Load .env if present; don't fail when it's absent (e.g. in CI).
+    env_file:
+      - path: .env
+        required: false
     environment:
       - REDIS_URL=redis://redis:6379/0
     ports:
@@ -38,7 +41,9 @@ services:
     build: ./backend
     command: python -m worker.worker
     restart: unless-stopped
-    env_file: .env
+    env_file:
+      - path: .env
+        required: false
     environment:
       - REDIS_URL=redis://redis:6379/0
     depends_on:
