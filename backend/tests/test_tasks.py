@@ -1,18 +1,15 @@
-"""Unit tests for the task functions in isolation (no queue involved)."""
+"""Unit tests for the task functions in isolation (no queue involved).
+
+Task output is redirected to a temp dir by the autouse `tmp_storage` fixture in
+conftest.py, so these never touch /app/storage.
+"""
 import os
 
 import pytest
 
-from app.config import get_settings
 from app.tasks.images import generate_thumbnail
 from app.tasks.registry import get_task
 from app.tasks.reports import aggregate_csv
-
-
-@pytest.fixture(autouse=True)
-def tmp_storage(tmp_path, monkeypatch):
-    """Write task outputs to a temp dir instead of /app/storage."""
-    monkeypatch.setattr(get_settings(), "storage_dir", str(tmp_path))
 
 
 def test_generate_thumbnail_writes_file():

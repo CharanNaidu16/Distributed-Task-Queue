@@ -15,6 +15,17 @@ from app.config import get_settings
 from app.main import app
 
 
+@pytest.fixture(autouse=True)
+def tmp_storage(tmp_path, monkeypatch):
+    """Point task file output at a per-test temp dir.
+
+    The default storage dir is /app/storage (correct inside the Docker
+    container), but that path isn't writable on a bare CI runner. Redirecting
+    it here keeps tasks from crashing when the worker runs them in tests.
+    """
+    monkeypatch.setattr(get_settings(), "storage_dir", str(tmp_path))
+
+
 @pytest.fixture
 def fake_redis(monkeypatch):
     """One shared fake Redis instance for the whole test.
